@@ -5,6 +5,7 @@ import javafx.stage.DirectoryChooser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -46,14 +47,15 @@ public class FileMoveModel {
         File destDir = fileChooser.showDialog(null);
         File[] files = destDir.listFiles();
         if (files != null) {
+            boolean configFound = false;
             for(File file: files) {
                 if (file.getName().equals(configFileName)) {
                     ArrayList<String> args = checkConfig(file);
                     destinationMap.put(destDir, args);
+                    configFound = true;
                 }
             }
-        } else {
-            destinationMap.put(destDir, null);
+            if (!configFound) destinationMap.put(destDir, null);
         }
         return destinationMap;
     }
@@ -74,11 +76,8 @@ public class FileMoveModel {
         return args;
     }
 
-    public String getExtension(String filename) {
-        String extension = "";
-        int i = filename.lastIndexOf('.');
-        if (i > 0) extension = filename.substring(i+1);
-        return extension;
+    public void updateDirectoryArgs(File current, ArrayList<String> args) {
+        destinationMap.put(current, args);
     }
 }
 
