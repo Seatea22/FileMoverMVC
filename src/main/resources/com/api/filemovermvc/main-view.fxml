@@ -51,7 +51,7 @@
         <Menu mnemonicParsing="false" text="File">
           <items>
             <MenuItem fx:id="openSourceButton" mnemonicParsing="false" onAction="#openSourcePressed" text="Open Source..." />
-                  <MenuItem fx:id="openDestButton" mnemonicParsing="false" text="Open Destination.." />
+                  <MenuItem fx:id="openDestButton" mnemonicParsing="false" onAction="#openDestPressed" text="Open Destination.." />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Quit" />
           </items>
@@ -62,17 +62,34 @@
         <items>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="sourceList" prefHeight="467.0" prefWidth="259.0" />
+                  <ListView fx:id="sourceList" onMouseClicked="#sourceViewClicked" prefHeight="475.0" prefWidth="259.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="469.0" prefWidth="248.0">
                <children>
-                  <ListView fx:id="destinationList" prefHeight="469.0" prefWidth="227.0" />
+                  <ListView fx:id="destinationList" onMouseClicked="#destListClicked" prefHeight="478.0" prefWidth="227.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="infoBox" alignment="TOP_LEFT" prefHeight="195.0" prefWidth="238.0" text="Label" />
+                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="475.0" prefWidth="238.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Label fx:id="sourceName" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="238.0" />
+                              <Label fx:id="sourceLastMod" alignment="TOP_LEFT" layoutY="50.0" prefHeight="25.0" prefWidth="238.0" />
+                              <Label fx:id="sourceFileExt" alignment="TOP_LEFT" layoutY="25.0" prefHeight="25.0" prefWidth="238.0" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <Label fx:id="destName" prefHeight="25.0" prefWidth="238.0" />
+                              <Label fx:id="destLastMod" alignment="TOP_LEFT" layoutX="-3.0" layoutY="25.0" prefHeight="25.0" prefWidth="238.0" />
+                              <Label fx:id="destExtensions" alignment="TOP_LEFT" layoutX="-3.0" layoutY="50.0" prefHeight="25.0" prefWidth="238.0" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
                </children>
             </AnchorPane>
         </items>
