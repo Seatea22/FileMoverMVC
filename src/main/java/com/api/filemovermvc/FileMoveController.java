@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class FileMoveController {
 
@@ -24,6 +25,9 @@ public class FileMoveController {
     }
 
     public void openSourcePressed(ActionEvent actionEvent) {
-        sourceList.getItems().addAll(model.openSource());
+        ArrayList<File> files = model.openSource();
+        if(!sourceList.getItems().isEmpty())
+            sourceList.getItems().clear();
+        sourceList.getItems().addAll(files);
     }
 }
