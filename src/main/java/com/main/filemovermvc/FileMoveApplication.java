@@ -1,4 +1,4 @@
-package com.api.filemovermvc;
+package com.main.filemovermvc;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ public class FileMoveApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(FileMoveApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 530);
-        stage.setTitle("Hello!");
+        stage.setTitle("File Mover");
         stage.setScene(scene);
         stage.show();
     }

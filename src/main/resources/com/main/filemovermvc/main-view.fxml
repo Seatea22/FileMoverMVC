@@ -45,7 +45,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="525.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.api.filemovermvc.FileMoveController">
+<VBox prefHeight="525.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.main.filemovermvc.FileMoveController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -88,7 +88,9 @@
                               <Label fx:id="destLastMod" alignment="TOP_LEFT" layoutX="-3.0" layoutY="25.0" prefHeight="25.0" prefWidth="238.0" />
                               <Label fx:id="destExtensions" alignment="TOP_LEFT" layoutX="-3.0" layoutY="50.0" prefHeight="25.0" prefWidth="238.0" />
                               <TextField fx:id="extensionField" layoutY="117.0" prefHeight="25.0" prefWidth="238.0" />
-                              <Button fx:id="extensionButton" layoutX="93.0" layoutY="149.0" mnemonicParsing="false" onAction="#extensionSubmit" text="Submit" />
+                              <Button fx:id="extensionButton" layoutX="92.0" layoutY="153.0" mnemonicParsing="false" onAction="#extensionSubmit" text="Submit" />
+                              <Button fx:id="removeDestButton" layoutX="168.0" layoutY="83.0" mnemonicParsing="false" onAction="#removeDesination" text="Remove" />
+                              <Label alignment="TOP_LEFT" layoutX="3.0" layoutY="87.0" prefHeight="25.0" prefWidth="163.0" text="Remove Destination Directory:" />
                            </children>
                         </AnchorPane>
                     </items>

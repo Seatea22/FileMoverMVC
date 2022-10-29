@@ -1,18 +1,19 @@
-package com.api.filemovermvc;
+package com.main.filemovermvc;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class FileMoveController {
     public TextField extensionField;
     public Button extensionButton;
+    public Button removeDestButton;
     private FileMoveModel model = new FileMoveModel();
     public MenuItem openSourceButton;
     public MenuItem openDestButton;
@@ -40,6 +41,9 @@ public class FileMoveController {
     }
 
     public void submitPressed(ActionEvent actionEvent) {
+        model.moveDestinationFiles();
+        sourceList.getItems().clear();
+        updateSourceView(model.loadSourceDirectory());
     }
 
     public void extensionSubmit(ActionEvent actionEvent) {
@@ -83,12 +87,22 @@ public class FileMoveController {
         }
     }
 
-    public void destListClicked(MouseEvent mouseEvent) {
-        if (listSelected("dest")){
-            File selectedItem = destinationList.getSelectionModel().getSelectedItem();
+    public void updateDestinationItemDetails() {
+        File selectedItem = destinationList.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
             destName.setText(selectedItem.getName());
             destLastMod.setText(String.valueOf(selectedItem.lastModified()));
             destExtensions.setText(Arrays.toString(new ArrayList[]{model.getDestinationMap().get(selectedItem)}));
+        } else {
+            destName.setText("");
+            destLastMod.setText("");
+            destExtensions.setText("");
+        }
+    }
+
+    public void destListClicked(MouseEvent mouseEvent) {
+        if (listSelected("dest")){
+            updateDestinationItemDetails();
         }
     }
 
@@ -108,8 +122,6 @@ public class FileMoveController {
             destinationList.getItems().clear();
         if (files != null) {
             files.forEach((k, v) -> destinationList.getItems().add(k));
-            System.out.println("hi");
-            System.out.println(destinationList);
         }
         else model.getDestinationMap().forEach((k, v) -> destinationList.getItems().add(k));
     }
@@ -121,5 +133,13 @@ public class FileMoveController {
         return extension;
     }
 
-
+    public void removeDesination(ActionEvent actionEvent) {
+        if (listSelected("dest")){
+            File selectedItem = destinationList.getSelectionModel().getSelectedItem();
+            model.removeDestination(selectedItem);
+            destinationList.getItems().clear();
+            updateDestinationView(model.getDestinationMap());
+            updateDestinationItemDetails();
+        }
+    }
 }

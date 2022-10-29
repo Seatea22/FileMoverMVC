@@ -7,6 +7,6 @@ module com.example.filemovermvc {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
 
-    opens com.api.filemovermvc to javafx.fxml;
-    exports com.api.filemovermvc;
+    opens com.main.filemovermvc to javafx.fxml;
+    exports com.main.filemovermvc;
 }

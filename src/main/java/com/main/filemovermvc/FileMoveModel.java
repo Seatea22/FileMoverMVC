@@ -1,9 +1,12 @@
-package com.api.filemovermvc;
+package com.main.filemovermvc;
 
 import javafx.stage.DirectoryChooser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,6 +23,46 @@ public class FileMoveModel {
     public File[] getSourceFileList() {
         return sourceFileList;
     }
+
+    public void removeDestination(File destination) {
+        destinationMap.remove(destination);
+    }
+
+    public void moveDestinationFiles() {
+        for (File file : sourceFileList) {
+            //System.out.println(file.getAbsolutePath());
+            String ext = getExtension(file.getName());
+
+            destinationMap.forEach((k, v) -> //k = file, v = extension array
+            {
+                if (k != null) {
+                    if (v != null) {
+                        for (String s : v) {
+                            if (ext.equals(s)) { //compares the extensions of file to those of the destination's ext array
+                                moveFile(file.getAbsolutePath(), k.getAbsolutePath() + "\\" + file.getName());
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    public String getExtension(String filename) {
+        String extension = "";
+        int i = filename.lastIndexOf('.');
+        if (i > 0) extension = filename.substring(i+1);
+        return extension;
+    }
+
+    public void moveFile(String sourcePath, String targetPath) {
+        try {
+            Files.move(Paths.get(sourcePath), Paths.get(targetPath), StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<File> openSource() {
         DirectoryChooser fileChooser = new DirectoryChooser();
         sourceDirectory = fileChooser.showDialog(null);
